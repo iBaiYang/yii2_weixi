@@ -1,3 +1,5 @@
+魏曦yii2教学地址：http://www.weixistyle.com/yii2.php
+
 Yii 2 Advanced Project Template
 ===============================
 
