@@ -94,13 +94,10 @@ class Tag extends \yii\db\ActiveRecord
 
     public static function updateFrequency( $oldTags, $newTags )
     {
-        if ( !empty($oldTags) && !empty($newTags) ) {
-            $oldTagsArray = self::string2array( $oldTags );
-            $newTagsArray = self::string2array( $newTags );
-
-            self::addTags( array_values( array_diff( $newTagsArray, $oldTagsArray ) ) );
-            self::removeTags( array_values( array_diff( $oldTagsArray, $newTagsArray ) ) );
-        }
+        $oldTagsArray = self::string2array( $oldTags );
+        $newTagsArray = self::string2array( $newTags );
+        self::addTags( array_values( array_diff( $newTagsArray, $oldTagsArray ) ) );
+        self::removeTags( array_values( array_diff( $oldTagsArray, $newTagsArray ) ) );
     }
 
 }
