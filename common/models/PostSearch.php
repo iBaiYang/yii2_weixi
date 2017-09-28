@@ -13,13 +13,22 @@ use common\models\Post;
 class PostSearch extends Post
 {
     /**
+     * 重写类属性
+     * @return array
+     */
+    public function attributes()
+    {
+        return array_merge( parent::attributes(), ['authorName'] );
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['id', 'status', 'create_time', 'update_time', 'author_id'], 'integer'],
-            [['title', 'content', 'tags'], 'safe'],
+            [['title', 'content', 'tags', 'authorName'], 'safe'],
         ];
     }
 
@@ -47,7 +56,27 @@ class PostSearch extends Post
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 5],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ],
+//                'attributes' => ['id', 'title'],
+            ],
         ]);
+
+//        echo "<pre>";
+//        print_r($dataProvider->getPagination());
+//        echo "<hr>";
+//        print_r($dataProvider->getSort());
+//        echo "<hr>";
+//        print_r($dataProvider->getCount());
+//        echo "<hr>";
+//        print_r($dataProvider->getTotalCount());
+//        echo "<hr>";
+//        print_r($dataProvider->getModels());
+//        echo "</pre>";
+//        exit(0);
 
         $this->load($params);
 
@@ -59,7 +88,7 @@ class PostSearch extends Post
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'post.id' => $this->id,
             'status' => $this->status,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
@@ -69,6 +98,15 @@ class PostSearch extends Post
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'tags', $this->tags]);
+
+        $query->join( 'INNER JOIN', 'adminuser', 'post.author_id = adminuser.id' );
+        $query->andFilterWhere( ['like', 'adminuser.nickname', $this->authorName] );
+
+        $dataProvider->sort->attributes['authorName'] =
+            [
+                'asc'=>['adminuser.nickname' => SORT_ASC],
+                'desc'=>['adminuser.nickname' => SORT_DESC],
+            ];
 
         return $dataProvider;
     }
