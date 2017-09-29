@@ -52,6 +52,7 @@ class CommentSearch extends Comment
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 5],
         ]);
 
         $this->load($params);
@@ -64,8 +65,8 @@ class CommentSearch extends Comment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
+            'comment.id' => $this->id,
+            'comment.status' => $this->status,
             'create_time' => $this->create_time,
             'userid' => $this->userid,
             'post_id' => $this->post_id,
@@ -83,6 +84,12 @@ class CommentSearch extends Comment
             [
                 'asc'=>['user.username' => SORT_ASC],
                 'desc'=>['user.username' => SORT_DESC],
+            ];
+
+        $dataProvider->sort->defaultOrder =
+            [
+                'status' => SORT_ASC,
+                'id' => SORT_DESC,
             ];
 
         return $dataProvider;

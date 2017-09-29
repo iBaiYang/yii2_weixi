@@ -28,14 +28,14 @@ use common\models\Poststatus;
     <?= $form->field($model, 'tags') ?>
 
     <?php // echo $form->field($model, 'status'); ?>
-    <?php echo $form->field($model, 'status')->dropDownList(
-        [Poststatus::find()
-            ->select(['name', 'id'])
-            ->orderBy('position')
-            ->indexBy('id')
-            ->column()
-        ],
-        ['prompt' => '请选择', 'style' => 'width:120px']
+    <?php echo $form->field($model, 'status')
+        ->dropDownList(
+            Poststatus::find()
+                ->select(['name', 'id'])
+                ->orderBy('position')
+                ->indexBy('id')
+                ->column(),
+            ['prompt' => '请选择', 'style' => 'width:120px']
     ); ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
