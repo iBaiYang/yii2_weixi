@@ -2,4 +2,4 @@
 # /index-test.php
 # /robots.txt
 
-/log
+/log/*.log
