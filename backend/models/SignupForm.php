@@ -77,7 +77,7 @@ class SignupForm extends Model
         $user->profile = $this->profile;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        $user->generatePasswordResetToken();
+//        $user->generatePasswordResetToken();  // 初次添加时为空，在找回密码发送邮件时会用到
         $user->password = $user->password_hash;
 //        $user->save(); VarDumper::dump($user->errors);exit(0);
         
