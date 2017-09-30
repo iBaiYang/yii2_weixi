@@ -77,7 +77,8 @@ class SignupForm extends Model
         $user->profile = $this->profile;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        $user->password = '*';
+        $user->generatePasswordResetToken();
+        $user->password = $user->password_hash;
 //        $user->save(); VarDumper::dump($user->errors);exit(0);
         
         return $user->save() ? $user : null;

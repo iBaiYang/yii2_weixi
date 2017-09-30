@@ -146,6 +146,5 @@ class AdminuserController extends Controller
         return $this->render('resetpwd', [
             'model' => $model,
         ]);
-
     }
 }

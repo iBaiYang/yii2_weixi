@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap\ActiveForm;  // yii\bootstrap\ActiveForm 继承自 yii\widgets\ActiveForm
 //use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
