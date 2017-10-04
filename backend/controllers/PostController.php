@@ -104,6 +104,10 @@ class PostController extends Controller
      */
     public function actionUpdate($id)
     {
+        if ( !Yii::$app->user->can('updatePost') ) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -123,6 +127,10 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
+        if ( !Yii::$app->user->can('deletePost') ) {
+            throw new ForbiddenHttpException('对不起，你没有进行该操作的权限。');
+        }
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
