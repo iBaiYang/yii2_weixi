@@ -145,7 +145,7 @@ class Comment extends \yii\db\ActiveRecord
     public static function findRecentComments( $limit = 10 )
     {
         return Comment::find()
-            ->where(['status'=>2])
+            ->where(['status' =>2 ])
             ->orderBy('create_time DESC')
             ->limit($limit)
             ->all();
