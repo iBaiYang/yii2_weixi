@@ -74,6 +74,16 @@ class Post extends \yii\db\ActiveRecord
     }
 
     /**
+     * 获取已审核评论
+     * @return $this
+     */
+    public function getActiveComments()
+    {
+        return $this->hasMany(Comment::className(), ['post_id' => 'id'])
+            ->where('status = :status', [':status' =>2 ])->orderBy('id DESC');
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getAuthor()
