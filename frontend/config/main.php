@@ -38,14 +38,17 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'enablePrettyUrl' => true,  // ?r= 省略
+            'showScriptName' => false,  // 脚本名index.php省略
+            'suffix' => '.html',  // 后缀名，实现伪静态
             'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/detail',
+                'posts' => 'post/index',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

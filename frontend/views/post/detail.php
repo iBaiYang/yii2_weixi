@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use yii\helpers\Url;
 
 use common\models\Comment;
 use frontend\components\TagsCloudWidget;
@@ -12,7 +13,15 @@ use frontend\components\RctReplyWidget;
     <div class="col-md-9">
         <ol class="breadcrumb">
             <li><a href="<?= Yii::$app->homeUrl;?>">首页</a></li>
-            <li><a href="<?= Yii::$app->homeUrl;?>?r=post/index">文章列表</a></li>
+            <li>
+                <a href="<?= Yii::$app->urlManager->createUrl(['post/index']);?>">文章列表</a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['post/index'], 'https');?>">文章列表(https)</a>
+            </li>
+            <li>
+                <a href="<?= Url::to(['post/index'], true);?>">文章列表(绝对地址)</a>
+            </li>
             <li class="active"><?= $model->title;?></li>
         </ol>
 
