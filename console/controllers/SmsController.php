@@ -11,7 +11,7 @@ class SmsController extends Controller
      * php ./yii sms/send
      * @return int
      */
-    public function actionSend1()
+    public function actionSend()
     {
         // 操作系统上的执行命令：输出重定向，写入sms.log日志
         // /var/www/yii2_weixi/yii sms/send >> /var/www/yii2_weixi/sms.log
