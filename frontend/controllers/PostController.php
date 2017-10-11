@@ -40,6 +40,7 @@ class PostController extends Controller
                 'variations' => [
                     Yii::$app->request->get('page'),
                     Yii::$app->request->get('PostSearch'),
+//                    Yii::$app->language,
                 ],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',

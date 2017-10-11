@@ -48,7 +48,7 @@ use yii\caching\DbDependency;
                         if ( $data === false ) {
                             $data = Post::find()->count();
                             Yii::$app->cache->set('postCount', $data, 600, $dependency);
-                            sleep(5);
+                            sleep(5);  // 模拟延迟效果
                         }
                         echo $data;
                     ?>）
@@ -75,7 +75,7 @@ use yii\caching\DbDependency;
 
                     if ( $this->beginCache('cache', ['duration' => 300], ['dependency' => $dependency]) ) {
                         echo TagsCloudWidget::widget(['tags'=>$tags]);
-                        sleep(5);
+                        sleep(5);  // 模拟延迟效果
                         $this->endCache();
                     }
                     ?>
