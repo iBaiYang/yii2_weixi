@@ -5,6 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 use frontend\components\TagsCloudWidget;
 use frontend\components\RctReplyWidget;
+use common\models\Post;
+use yii\caching\DbDependency;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PostSearch */
@@ -36,7 +38,20 @@ use frontend\components\RctReplyWidget;
         <div class="searchbox">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查找文章
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    查找文章（
+                    <?php
+                        // 数据缓存示例
+                        $data = Yii::$app->cache->get('postCount');
+                        $dependency = new DbDependency( ['sql' => 'select count(id) from post'] );
+
+                        if ( $data === false ) {
+                            $data = Post::find()->count();
+                            Yii::$app->cache->set('postCount', $data, 600, $dependency);
+                            sleep(5);
+                        }
+                        echo $data;
+                    ?>）
                 </li>
                 <li class="list-group-item">
                     <form class="form-inline" action="<?= Yii::$app->urlManager->createUrl(['post/index']);?>" id="w0" method="get">
@@ -54,7 +69,16 @@ use frontend\components\RctReplyWidget;
                     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签云
                 </li>
                 <li class="list-group-item">
-                    <?= TagsCloudWidget::widget(['tags'=>$tags]);?>
+                    <?php
+                    // 片段缓存示例
+                    $dependency = new DbDependency( ['sql' => 'select count(id) from post'] );
+
+                    if ( $this->beginCache('cache', ['duration' => 300], ['dependency' => $dependency]) ) {
+                        echo TagsCloudWidget::widget(['tags'=>$tags]);
+                        sleep(5);
+                        $this->endCache();
+                    }
+                    ?>
                 </li>
             </ul>
         </div>

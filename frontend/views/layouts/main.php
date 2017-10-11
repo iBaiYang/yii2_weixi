@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '魏曦教你学Yii2.0',
+        'brandLabel' => 'Demo教你学Yii2.0',
         'brandOptions' => ['style' => 'color : yellow; font-size : 23px;'],
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
