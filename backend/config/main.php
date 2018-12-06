@@ -24,11 +24,8 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
+            'name' => 'session-backend',
 //            'savePath' => sys_get_temp_dir(),
-        ],
-        'request' => [
-            'cookieValidationKey'=>'sdfjjksloeedf78789judf',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
