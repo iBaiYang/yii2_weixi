@@ -29,7 +29,6 @@ return [
         ],
         'request' => [
             'cookieValidationKey'=>'sdfjjksloeedf78789judf',
-            'csrfParam'=>'_adminCSRF',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
